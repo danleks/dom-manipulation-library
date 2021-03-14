@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DOM Manipulation Library</title>
+
+	<style type="text/css">
+		body {
+			margin: 1em auto;
+			max-width: 40em;
+			width: 88%;
+		}
+
+
+		.btn-blue {
+			background-color: #0088cc;
+			color: #ffffff;
+		}
+
+		.btn-purple {
+			background-color: rebeccapurple;
+			color: #ffffff;
+		}
+
+        .text-red {
+            color: red;
+        }
+
+        .text-bold {
+            font-size: 20px;
+            font-weight: bold;
+        }
+	</style>
+</head>
+<body>
+
+	<h1>DOM Manipulation Library</h1>
+
+	<p>All of the fun here happens in the console.</p>
+
+	<p>
+		<button class="btn-blue" id="button-1">Button 1</button>
+		<button class="btn-blue" id="button-2">Button 2</button>
+		<button class="btn-blue" id="button-3">Button 3</button>
+	</p>
+
+	<ul>
+		<li class="text-bold">Item 1</li>
+		<li class="text-bold">Item 2</li>
+		<li class="text-bold">Item 3</li>
+	</ul>
+
+	<script>
+		const $ = (() => {
+            /**
+            *The Constructor objecy
+            */
+            const Constructor = function (selector) {
+                this.elems = document.querySelectorAll(selector);
+            };
+
+            Constructor.prototype.toArray = function () {
+                return Array.from(this.elems);
+            }
+            
+            Constructor.prototype.getFirstAndLastElem = function() {
+                const array = this.toArray();
+                const firtsElem = array[0];
+                const lastElem = array[array.length - 1];
+                
+                return [firtsElem, lastElem];
+            }
+
+            Constructor.prototype.addClass = function(className) {
+                this.toArray().forEach(item => {
+                    item.classList.add(className);
+                })
+            }
+
+            Constructor.prototype.removeClass = function(className) {
+                this.toArray().forEach(item => {
+                    item.classList.remove(className);
+                })
+            }
+
+            /**
+            Return the Constructor
+            */
+
+            return Constructor;
+        })();
+        const listItem = new $('li');
+        const button = new $('button');
+
+        // list item 
+        const listItemArray = listItem.toArray();
+        const firstAndLastListItem = listItem.getFirstAndLastElem();
+        listItem.addClass('text-red');
+        listItem.removeClass('text-bold');
+        // button
+        const buttonArray = button.toArray();
+        const firstAndLastButton = button.getFirstAndLastElem();
+        button.removeClass('btn-blue');
+        button.addClass('btn-purple');
+	</script>
+</body>
+</html>
