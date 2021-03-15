@@ -52,7 +52,7 @@
 	<script>
 		const $ = (() => {
             /**
-            *The Constructor objecy
+            *The Constructor object
             */
             const Constructor = function (selector) {
                 this.elems = document.querySelectorAll(selector);
@@ -73,13 +73,15 @@
             Constructor.prototype.addClass = function(className) {
                 this.toArray().forEach(item => {
                     item.classList.add(className);
-                })
+                });
+                return this;
             }
 
             Constructor.prototype.removeClass = function(className) {
                 this.toArray().forEach(item => {
                     item.classList.remove(className);
-                })
+                });
+                return this;
             }
 
             /**
@@ -94,13 +96,12 @@
         // list item 
         const listItemArray = listItem.toArray();
         const firstAndLastListItem = listItem.getFirstAndLastElem();
-        listItem.addClass('text-red');
-        listItem.removeClass('text-bold');
+        listItem.addClass('text-red').removeClass('text-bold');
+       
         // button
         const buttonArray = button.toArray();
         const firstAndLastButton = button.getFirstAndLastElem();
-        button.removeClass('btn-blue');
-        button.addClass('btn-purple');
+        button.removeClass('btn-blue').addClass('btn-purple');
 	</script>
 </body>
 </html>
